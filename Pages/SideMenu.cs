@@ -13,7 +13,7 @@ namespace EMagTest.Pages
         }
 
         public By sideMenuElementsList_locator => By.CssSelector(".emg-aside-links li");
-        public By sideMenuLaptopCateg_locator => By.XPath("//*[@class='emg-aside-links']/li[1]/a");
+        public By sideMenuLaptopCateg_locator => By.XPath("//*[@class='emg-aside-links']/li[1]/a");  //.sidebar-tree-subdepartment .sidebar-tree-item" 
 
 
 

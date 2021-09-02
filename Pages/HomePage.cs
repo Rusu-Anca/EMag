@@ -15,7 +15,7 @@ namespace EMagTest.Pages
         public By acceptCokkies_locator => By.ClassName("js-accept");
         public By closeOfertaZIlei_locator => By.ClassName("close");
 
-        public By dismissLoghinBtn_locator => By.CssSelector(".js-dismiss-login-notice-btn .em-close");
+        public By dismissLoghinBtn_locator => By.CssSelector(".container .js-dismiss-login-notice-btn"); //".js-dismiss-login-notice-btn .em-close");
 
         public By intraInContBtn_location => By.CssSelector(".content-wrap~a");
 

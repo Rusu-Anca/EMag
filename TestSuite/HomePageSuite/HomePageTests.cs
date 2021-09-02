@@ -166,7 +166,7 @@ namespace EMagTest.TestSuite
             HomePage home = new HomePage(driver);
             home.DismissOfertaZileAndAcceptCookies();
             RibbonMenu menu = new RibbonMenu(driver);
-            menu.ClickOnMenuANDSubmenu(SubMenu);
+            menu.HoverOnMenuClickSubmenuItem(SubMenu);
             SideMenu side_menu = new SideMenu(driver);
             side_menu.ClickOnProductCategorySideMenu(ProductCategory);
             Thread.Sleep(1000);
