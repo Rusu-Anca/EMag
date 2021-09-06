@@ -30,6 +30,9 @@ namespace EMagTest.TestSuite
             driver.Quit();
         }
 
+        /// <summary>
+        /// Can't configure login tests due to Captcha!!!!
+        /// </summary>
         [Test]
         public void LogInSuccessTest()
         {
@@ -39,6 +42,9 @@ namespace EMagTest.TestSuite
             login.LogIn(Config.LogInURL, Config.Credentials.Valid.Email, Config.Credentials.Valid.Password);
         }
 
+        /// <summary>
+        /// Can't login using GMail due blockers for using browsers controlled by automation tools.
+        /// </summary>
         [Test]
         public void LogInWithGoogleAccount()
         {

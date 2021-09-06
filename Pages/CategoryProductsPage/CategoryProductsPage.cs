@@ -16,5 +16,23 @@ namespace EMagTest.Pages.CategoryProductsPage
         //.has-floating-listing-panel-footer .listing-grid-group-scroller-outer
 
         //get text
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool CheckActiveFilterHeader(string filterName)
+        {
+            bool result = false;
+            IReadOnlyCollection<IWebElement> activeFilter = driver.FindElements(activeFilters_locator,20);
+            foreach(IWebElement filter in activeFilter)
+            {
+                Console.WriteLine(filter.Text);
+                if (filter.Text.Contains(filterName))
+                {
+                    result = true;
+                }
+            }
+            return result;
+        }
     }
 }

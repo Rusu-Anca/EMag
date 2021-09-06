@@ -23,7 +23,7 @@ namespace EMagTest.TestSuite
             {"Cardul eMAG de la Raiffeisen Bank","Aplica acum! Ai până la 10% înapoi în puncte și până la 24 rate fara dobândă." },
             {"Dăruiește un voucher eMAG ","Fă-le o surpriză celor dragi și oferă-le un voucher cadou cu care să își cumpere exact ce își doresc!" }
         };
-        public const string OfertaZileiPageTitle = "Oferta zilei bauturi 24 august: Whiskey, vodka & cognac"; // "Fier de calcat portabil Rowenta Tweeny Nano DV9000D1, Calcare verticala si orizontala, 950W, Rezervor detasabil 50ml, Autonomie 10min, Perie pentru tesaturi, Alb - eMAG.ro";
+        public const string OfertaZileiPageTitle = "Oferta-zilei"; //  Oferta zilei / "Fier de calcat portabil Rowenta Tweeny Nano DV9000D1, Calcare verticala si orizontala, 950W, Rezervor detasabil 50ml, Autonomie 10min, Perie pentru tesaturi, Alb - eMAG.ro";
         public const string ProductCategory = "Laptopuri si accesorii";
         public const string ProductSubCategory = "Laptopuri";
 
@@ -48,6 +48,9 @@ namespace EMagTest.TestSuite
             driver.Quit();
         }
 
+        /// <summary>
+        /// Check you can close Oferta zilei alert & accept Cookie.
+        /// </summary>
         [Test]
         public void AcceptCookiesTest()
         {
@@ -58,6 +61,9 @@ namespace EMagTest.TestSuite
 
         }
 
+        /// <summary>
+        /// Check you can dismiss the Login banner.
+        /// </summary>
         [Test]
         public void DismissLoginButtonTest()
         {
@@ -65,6 +71,9 @@ namespace EMagTest.TestSuite
             home.DismissOfertaZileAndAcceptCookies();
         }
 
+        /// <summary>
+        /// Check you can click on the EMag Genius Benefits link, and you are redirected to the correct page.
+        /// </summary>
         [Test]
         public void EMagGeniusBenefitRedirectTest()
         {
@@ -91,8 +100,9 @@ namespace EMagTest.TestSuite
 
         }
 
-
-
+        /// <summary>
+        /// Check hovering over the EMag Genius benefits, tool tip info is displayed.
+        /// </summary>
         [Test]
         public void EMagGeniusToolTipDisplayTest()
         {
@@ -102,7 +112,9 @@ namespace EMagTest.TestSuite
             Console.WriteLine(home.CheckToolTipIsDisplayed(benefits_collection.Values.ElementAt(0)));
         }
 
-
+        /// <summary>
+        /// Check hovering over the Easy Box benefits, tool tip info is displayed.
+        /// </summary>
         [Test]
         public void EasyBoxToolTipDisplayTest()
         {
@@ -112,6 +124,9 @@ namespace EMagTest.TestSuite
             Assert.IsTrue(home.CheckToolTipIsDisplayed(benefits_collection.Values.ElementAt(1)));
         }
 
+        /// <summary>
+        /// Check hovering over the Livrarea in 1h benefits, tool tip info is displayed.
+        /// </summary>
         [Test]
         public void LivrareTazzToolTipDisplayTest()
         {
@@ -121,6 +136,9 @@ namespace EMagTest.TestSuite
             Assert.IsTrue(home.CheckToolTipIsDisplayed(benefits_collection.Values.ElementAt(2)));
         }
 
+        /// <summary>
+        /// Check hovering over the Cardul EMag de la Raiffeisen benefits, tool tip info is displayed.
+        /// </summary>
         [Test]
         public void RaiffeisenCardToolTipDisplayTest()
         {
@@ -130,7 +148,9 @@ namespace EMagTest.TestSuite
             Assert.IsTrue(home.CheckToolTipIsDisplayed(benefits_collection.Values.ElementAt(3)));
         }
 
-        //this test fails and I can't determine the reason- after hover the tooltip pane is no longer displayed
+        /// <summary>
+        /// Check hovering over the Daruiesteun voucher EMag benefits, tool tip info is displayed.
+        /// </summary>
         [Test]
         public void DaruiesteVoucherToolTipDisplayTest()
         {
@@ -140,14 +160,10 @@ namespace EMagTest.TestSuite
             Assert.IsTrue(home.CheckToolTipIsDisplayed(benefits_collection.Values.ElementAt(4)));
         }
 
-        [Test]
-        public void GetFrameIDs()
-        {
-            HomePage home = new HomePage(driver);
-            home.DismissOfertaZileAndAcceptCookies();
-            home.CountIFrames();
-        }
-
+       /// <summary>
+       /// Assert the test switces to an IFrame, idenfies an element within the IFrame, clicks on it 
+       /// & you are redirected to the correct page.
+       /// </summary>
         [Test]
         public void TestOfertaZileiCarouselLink()
         {
@@ -157,22 +173,9 @@ namespace EMagTest.TestSuite
             home.CarouselDotsClick(1);
             home.SwitchToIFrame();
             home.ClickOnIframeLink();
-            Assert.AreEqual(home.GetPageTitle(), OfertaZileiPageTitle);
-        }
-
-        [Test]
-        public void NavigateLaptopsPageFromMenu()
-        {
-            HomePage home = new HomePage(driver);
-            home.DismissOfertaZileAndAcceptCookies();
-            RibbonMenu menu = new RibbonMenu(driver);
-            menu.HoverOnMenuClickSubmenuItem(SubMenu);
-            SideMenu side_menu = new SideMenu(driver);
-            side_menu.ClickOnProductCategorySideMenu(ProductCategory);
-            Thread.Sleep(1000);
-            side_menu.ClickOnLaptopCategory();
-            Assert.AreEqual(side_menu.GetPageTitle(), LaptopPageTitle);
+            Assert.IsTrue(home.PageTitleContains(OfertaZileiPageTitle));
 
         }
+
     }
 }

@@ -21,7 +21,7 @@ namespace EMagTest.Pages
         {
             IList<IWebElement> productCategoryList = driver.FindElements(sideMenuElementsList_locator);
 
-            foreach(IWebElement productCateg in productCategoryList)
+            foreach (IWebElement productCateg in productCategoryList)
             {
                 if (productCateg.Text.Equals(expectedCategory))
                 {
@@ -31,7 +31,7 @@ namespace EMagTest.Pages
             }
         }
 
-        public void ClickOnLaptopCategory() => driver.FindElement(sideMenuLaptopCateg_locator).Click();
-                
+        public void ClickOnLaptopCategory() => driver.FindElement(sideMenuLaptopCateg_locator, 5, displayed: true).Click();
+
     }
 }

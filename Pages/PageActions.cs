@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
+
 namespace EMagTest
 {
     public class PageActions
@@ -11,19 +12,20 @@ namespace EMagTest
         public IWebDriver driver;
         public WebDriverWait wait;
         public int timeout;
+        //public DefaultWait fluentWait;
 
         public PageActions(IWebDriver driver)
         {
             this.driver = driver;
         }
-       public void LoadComplete()
+        public void LoadComplete()
         {
             var wait = new WebDriverWait(driver, TimeSpan.FromMilliseconds(timeout));
 
             // Wait for the page to load
             wait.Until(d => ((IJavaScriptExecutor)d).ExecuteScript("return document.readyState").Equals("complete"));
         }
-       
+
         public void GoToURL(string url)
         {
             driver.Navigate().GoToUrl(url);
@@ -31,7 +33,12 @@ namespace EMagTest
 
         public string GetPageTitle()
         {
-           return driver.Title;
+            return driver.Title;
+        }
+
+        public bool PageTitleContains(string pageTitleString)
+        {
+            return driver.Title.Contains(pageTitleString);
         }
 
         public void Refresh() => driver.Navigate().Refresh();

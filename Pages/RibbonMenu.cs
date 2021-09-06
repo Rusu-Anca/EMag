@@ -18,7 +18,7 @@ namespace EMagTest.Pages
 
         public void HoverOnMenuClickSubmenuItem(string expected)
         {
-            driver.ActionsMouseHover(driver.FindElement(MainMenu_locator, 10));
+            driver.ActionsMouseHover(driver.FindElement(MainMenu_locator, 10, displayed: true));
 
             IList<IWebElement> menu_list = driver.FindElements(productsDepartment_locator);
 

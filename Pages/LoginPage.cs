@@ -23,7 +23,7 @@ namespace EMagTest.Pages
         public By ValidareCodField_locator => By.Id("validate_mfa_code");
 
         public By validareCodContinueButton_locator => By.Id("validate_mfa_continue");
-       
+
         public By googleLink_locator => By.ClassName("google");
 
         public By gmailEmail_locator => By.CssSelector("input[type='email']");
@@ -65,14 +65,13 @@ namespace EMagTest.Pages
             GoToURL(URL);
             driver.FindElement(email_locaor).EnterText(email);
             driver.FindElement(continueButton_locator).Click();
-            //LoadComplete();
-            driver.FindElement(password_locator,10).EnterText(password);
+            driver.FindElement(password_locator, 10, displayed: true).EnterText(password);
             driver.FindElement(continueButton_locator).Click();
-            driver.FindElement(trimiteCodButton_locator,10).Click();
+            driver.FindElement(trimiteCodButton_locator, 10, displayed: true).Click();
 
         }
 
-        public void LogInWithGmail(string URL,string gmail, string gmailPassword)
+        public void LogInWithGmail(string URL, string gmail, string gmailPassword)
         {
             GoToURL(URL);
             NavigateToGogle();

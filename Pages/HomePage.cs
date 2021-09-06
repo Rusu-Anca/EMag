@@ -10,8 +10,7 @@ namespace EMagTest.Pages
 
     public class HomePage : PageActions
     {
-        // public IWebDriver driver;
-
+        
         public By acceptCokkies_locator => By.ClassName("js-accept");
         public By closeOfertaZIlei_locator => By.ClassName("close");
 
@@ -35,7 +34,7 @@ namespace EMagTest.Pages
 
         public By IFrameList_locator => By.CssSelector(".js-dfp-slide-item iframe");
 
-        public string OfertaZileiIFrame_ID ="google_ads_iframe_/296121929/Slider_Home_2_0"; //"google_ads_iframe_/296121929/Slider_Home_Mbl_2_0";
+        public string OfertaZileiIFrame_ID = "google_ads_iframe_/296121929/Slider_Home_2_0"; //"google_ads_iframe_/296121929/Slider_Home_Mbl_2_0";
 
         public By IFrameLink_locator => By.CssSelector(".GoogleActiveViewElement>a");
 
@@ -49,24 +48,32 @@ namespace EMagTest.Pages
 
 
         public bool AssertTitle(string expected) => driver.Title.Equals(expected);
-        public void AcceptCookies() => driver.FindElement(acceptCokkies_locator, 10).Click();
-        public void ClickOnToolTipLink() => driver.FindElement(toolTipLink_locator, 5).Click();
+        public void AcceptCookies() => driver.FindElement(acceptCokkies_locator, 10, displayed: true).Click();
+        public void ClickOnToolTipLink() => driver.FindElement(toolTipLink_locator, 5, displayed: true).Click();
 
-        public void CloseOfertaZilei() => driver.FindElement(closeOfertaZIlei_locator, 10).Click();
+        public void CloseOfertaZilei() => driver.FindElement(closeOfertaZIlei_locator, 10, displayed: true).Click();
 
-
+        /// <summary>
+        /// Dismiss the Login notice.
+        /// </summary>
         public void DismissLoghinNoticeBtn()
         {
-            Thread.Sleep(1000);
-            IWebElement dismissButon = driver.FindElement(dismissLoghinBtn_locator,10);
+            Thread.Sleep(2000);
+            IWebElement dismissButon = driver.FindElement(dismissLoghinBtn_locator, 10, displayed: true);
             IJavaScriptExecutor jsExecutor = (IJavaScriptExecutor)driver;
             jsExecutor.ExecuteScript("arguments[0].click();", dismissButon);
         }
 
         public void IntraInContButton() => driver.FindElement(intraInContBtn_location).Click();
 
+        /// <summary>
+        /// Click on the Login button displayed on the banner.
+        /// </summary>
         public void NavigateToLoginPage() => driver.FindElement(BannerLogInButton_locator).Click();
 
+        /// <summary>
+        /// Dismiss all banners & alerts.
+        /// </summary>
         public void DismissOfertaZileAndAcceptCookies()
         {
             Thread.Sleep(500);
@@ -75,6 +82,10 @@ namespace EMagTest.Pages
             DismissLoghinNoticeBtn();
         }
 
+        /// <summary>
+        /// Identify the benefit you want to hover over from the list of benefits.
+        /// </summary>
+        /// <param name="benefitName">The benefit you want to hover over.</param>
         public void HoverOverBenefitsElement(string benefitName)
         {
             IList<IWebElement> benefitsList = driver.FindElements(widgetBenefits_locator);
@@ -89,6 +100,11 @@ namespace EMagTest.Pages
             }
         }
 
+
+        /// <summary>
+        /// Identify the benefit you want to click on within the list of benefits, and click on it.
+        /// </summary>
+        /// <param name="benefitName">The benefit you want to click on.</param>
         public void ClickOnBenefitsElement(string benefitName)
         {
             IReadOnlyCollection<IWebElement> benefitsList = driver.FindElements(widgetBenefits_locator, 10);
@@ -102,6 +118,12 @@ namespace EMagTest.Pages
                 }
             }
         }
+
+        /// <summary>
+        /// Go through the tool tip elements list, and if the searched element is displayed return true, else False.
+        /// </summary>
+        /// <param name="tooltipText">The text the tool tip info pane displayes.</param>
+        /// <returns>True or False.</returns>
         public bool CheckToolTipIsDisplayed(string tooltipText)
         {
             bool result = false;
@@ -121,20 +143,10 @@ namespace EMagTest.Pages
             return result;
         }
 
-        public void CountIFrames()
-        {
-            string iframeID = null;
-            IReadOnlyCollection<IWebElement> iFrameList = driver.FindElements(IFrameList_locator, 10);
-            foreach (IWebElement iframe in iFrameList)
-            {
-                if (iframe.IsDisplayed("IFrameList_locator"))
-                {
-                    iframeID = iframe.GetAttribute("id");
-                    Console.WriteLine(iframeID);
-                }
-            }
-        }
-
+        /// <summary>
+        /// Click on the Dots that control the displayed frame on the carousel.
+        /// </summary>
+        /// <param name="index">Is the  dot's index, within the list. that you want to click.</param>
         public void CarouselDotsClick(int index)
         {
             IList<IWebElement> dots = driver.FindElements(BannerCarouselDots_locator);
@@ -145,8 +157,14 @@ namespace EMagTest.Pages
         public void CarouselLeftArrowClick() => driver.FindElement(CarouselLeftArrow_locator).Click();
         public void CarouselRightArrowClick() => driver.FindElement(CarouselRightArrow_locator).Click();
 
+        /// <summary>
+        /// Switch to Oferta Zilei IFrame.
+        /// </summary>
         public void SwitchToIFrame() => driver.SwitchTo().Frame(OfertaZileiIFrame_ID);
 
+        /// <summary>
+        /// Click on IFrame from the carousel to navigate to it's page.
+        /// </summary>
         public void ClickOnIframeLink() => driver.FindElement(IFrameLink_locator).Click();
 
 

@@ -17,13 +17,19 @@ namespace EMagTest.Pages.CategoryProductsPage
 
         public void ExpadEMagFilter() => driver.FindElement(eMagGeniusFilter_locator).Click();
 
+        /// <summary>
+        /// Tick an filter option from the EMagGenius Filter section.
+        /// </summary>
+        /// <param name="filterOption">It's the filter option that is ticked.</param>
         public void SelectEmagGeniusFilter(string filterOption)
         {
             IList<IWebElement> eMagGeniusFilters = driver.FindElements(eMagGeniusFilterOptions_locator);
             foreach (IWebElement filter in eMagGeniusFilters)
             {
-                if (filter.Text.Equals(filterOption))
+                Console.WriteLine(filter.Text);
+                if (filter.Text.Contains(filterOption))
                 {
+                    
                     filter.Click();
                     break;
                 }
