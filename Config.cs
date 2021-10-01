@@ -11,6 +11,7 @@ namespace EMagTest
         public static string BaseURL = "https://www.emag.ro/";
         public static string LogInURL = "https://auth.emag.ro/user/login";
         public static string LogInCodeURL = "https://auth.emag.ro/user/validate-mfa";
+        public static string GentiLaptopPageURL = "https://www.emag.ro/genti-laptop/c?ref=search_menu_category";
 
         public static class Credentials
         {

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace EMagTest.Pages
 {
-    class UserMenuBar : PageActions
+   public class UserMenuBar : PageBase
     {
 
         public UserMenuBar(IWebDriver driver) : base(driver)

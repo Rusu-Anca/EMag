@@ -5,7 +5,7 @@ using System.Text;
 
 namespace EMagTest.Pages
 {
-    class SideMenu : PageActions
+    public class SideMenu : PageBase
     {
 
         public SideMenu(IWebDriver driver) : base(driver)
@@ -13,7 +13,7 @@ namespace EMagTest.Pages
         }
 
         public By sideMenuElementsList_locator => By.CssSelector(".emg-aside-links li");
-        public By sideMenuLaptopCateg_locator => By.XPath("//*[@class='emg-aside-links']/li[1]/a");
+        public By sideMenuLaptopCateg_locator => By.XPath("//*[@class='emg-aside-links']/li[1]/a");  //.sidebar-tree-subdepartment .sidebar-tree-item" 
 
 
 
@@ -21,7 +21,7 @@ namespace EMagTest.Pages
         {
             IList<IWebElement> productCategoryList = driver.FindElements(sideMenuElementsList_locator);
 
-            foreach(IWebElement productCateg in productCategoryList)
+            foreach (IWebElement productCateg in productCategoryList)
             {
                 if (productCateg.Text.Equals(expectedCategory))
                 {
@@ -31,7 +31,7 @@ namespace EMagTest.Pages
             }
         }
 
-        public void ClickOnLaptopCategory() => driver.FindElement(sideMenuLaptopCateg_locator).Click();
-                
+        public void ClickOnLaptopCategory() => driver.FindElement(sideMenuLaptopCateg_locator, 5, displayed: true).Click();
+
     }
 }

@@ -5,20 +5,20 @@ using System.Text;
 
 namespace EMagTest.Pages
 {
-    class RibbonMenu : PageActions
+    public class RibbonMenu : PageBase
     {
 
         public RibbonMenu(IWebDriver driver) : base(driver)
         {
         }
 
-        public By MainMenu_locator => By.ClassName("em-burger");
-        public By productsDepartment_locator => By.ClassName("js-megamenu-list-department-link"); 
+        public By MainMenu_locator => By.ClassName("navbar-aux-content__departments");
+        public By productsDepartment_locator => By.ClassName("js-megamenu-list-department-link");
 
 
-        public void ClickOnMenuANDSubmenu(string expected)
+        public void HoverOnMenuClickSubmenuItem(string expected)
         {
-           // driver.FindElement(MainMenu_locator,10).Click();
+            driver.ActionsMouseHover(driver.FindElement(MainMenu_locator, 10, displayed: true));
 
             IList<IWebElement> menu_list = driver.FindElements(productsDepartment_locator);
 
