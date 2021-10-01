@@ -1,4 +1,5 @@
 ﻿using EMagTest.Pages;
+using EMagTest.WebDriverFactory;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -8,12 +9,12 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using static EMagTest.WebDriverFactory.Browser;
 
 namespace EMagTest.TestSuite
 {
     class HomePageTests
     {
-        IWebDriver driver;
         public const string HomePage_Title = "eMAG.ro - Libertate în fiecare zi";
         public const string eMagGeniusPage_Title = "eMAG genius: serviciul tău premium de cumpărături - eMAG.ro";
         Dictionary<string, string> benefits_collection = new Dictionary<string, string> {
@@ -30,23 +31,20 @@ namespace EMagTest.TestSuite
         public const string SubMenu = "Laptop, Tablete & Telefoane";
         public const string LaptopPageTitle = "Laptopuri - eMAG.ro";
 
-
-
         [SetUp]
         public void Setup()
         {
-            driver = new ChromeDriver(Path.GetFullPath(@"../../../" + @"Resources\ChromeDriver"));
-            driver.Navigate().GoToUrl(Config.BaseURL);
-            driver.Manage().Window.Maximize();
-
+            Browser.Init(BrowserName.Chrome);
+            Browser.Loadpage(Config.BaseURL);
+            PageWrapper.Init();
         }
 
         [TearDown]
         public void Close()
         {
-            driver.Close();
-            driver.Quit();
+            Browser.Close();
         }
+
 
         /// <summary>
         /// Check you can close Oferta zilei alert & accept Cookie.
@@ -54,10 +52,9 @@ namespace EMagTest.TestSuite
         [Test]
         public void AcceptCookiesTest()
         {
-            HomePage home = new HomePage(driver);
-            Thread.Sleep(500);
-            home.CloseOfertaZilei();
-            home.AcceptCookies();
+            // Thread.Sleep(500);
+            PageWrapper.home.CloseOfertaZilei();
+            PageWrapper.home.AcceptCookies();
 
         }
 
@@ -67,8 +64,7 @@ namespace EMagTest.TestSuite
         [Test]
         public void DismissLoginButtonTest()
         {
-            HomePage home = new HomePage(driver);
-            home.DismissOfertaZileAndAcceptCookies();
+            PageWrapper.home.DismissOfertaZileAndAcceptCookies();
         }
 
         /// <summary>
@@ -77,10 +73,8 @@ namespace EMagTest.TestSuite
         [Test]
         public void EMagGeniusBenefitRedirectTest()
         {
-            HomePage home = new HomePage(driver);
-            home.ClickOnBenefitsElement(benefits_collection.Keys.ElementAt(0));
-            EMagGeniusPage genius = new EMagGeniusPage(driver);
-            Assert.AreEqual(genius.GetPageTitle(), eMagGeniusPage_Title);
+            PageWrapper.home.ClickOnBenefitsElement(benefits_collection.Keys.ElementAt(0));
+            Assert.AreEqual(PageWrapper.eMagGenius.GetPageTitle(), eMagGeniusPage_Title);
 
         }
 
@@ -91,12 +85,10 @@ namespace EMagTest.TestSuite
         [Test]
         public void EMagGeniusBenefitToolTipLinkTest()
         {
-            HomePage home = new HomePage(driver);
-            home.DismissOfertaZileAndAcceptCookies();
-            home.HoverOverBenefitsElement(benefits_collection.Keys.ElementAt(0));
-            home.ClickOnToolTipLink();
-            EMagGeniusPage genius = new EMagGeniusPage(driver);
-            Assert.AreEqual(genius.GetPageTitle(), eMagGeniusPage_Title);
+            PageWrapper.home.DismissOfertaZileAndAcceptCookies();
+            PageWrapper.home.HoverOverBenefitsElement(benefits_collection.Keys.ElementAt(0));
+            PageWrapper.home.ClickOnToolTipLink();
+            Assert.AreEqual(PageWrapper.eMagGenius.GetPageTitle(), eMagGeniusPage_Title);
 
         }
 
@@ -106,10 +98,9 @@ namespace EMagTest.TestSuite
         [Test]
         public void EMagGeniusToolTipDisplayTest()
         {
-            HomePage home = new HomePage(driver);
-            home.DismissOfertaZileAndAcceptCookies();
-            home.HoverOverBenefitsElement(benefits_collection.Keys.ElementAt(0));
-            Console.WriteLine(home.CheckToolTipIsDisplayed(benefits_collection.Values.ElementAt(0)));
+            PageWrapper.home.DismissOfertaZileAndAcceptCookies();
+            PageWrapper.home.HoverOverBenefitsElement(benefits_collection.Keys.ElementAt(0));
+            Console.WriteLine(PageWrapper.home.CheckToolTipIsDisplayed(benefits_collection.Values.ElementAt(0)));
         }
 
         /// <summary>
@@ -118,10 +109,9 @@ namespace EMagTest.TestSuite
         [Test]
         public void EasyBoxToolTipDisplayTest()
         {
-            HomePage home = new HomePage(driver);
-            home.DismissOfertaZileAndAcceptCookies();
-            home.HoverOverBenefitsElement(benefits_collection.Keys.ElementAt(1));
-            Assert.IsTrue(home.CheckToolTipIsDisplayed(benefits_collection.Values.ElementAt(1)));
+            PageWrapper.home.DismissOfertaZileAndAcceptCookies();
+            PageWrapper.home.HoverOverBenefitsElement(benefits_collection.Keys.ElementAt(1));
+            Assert.IsTrue(PageWrapper.home.CheckToolTipIsDisplayed(benefits_collection.Values.ElementAt(1)));
         }
 
         /// <summary>
@@ -130,10 +120,9 @@ namespace EMagTest.TestSuite
         [Test]
         public void LivrareTazzToolTipDisplayTest()
         {
-            HomePage home = new HomePage(driver);
-            home.DismissOfertaZileAndAcceptCookies();
-            home.HoverOverBenefitsElement(benefits_collection.Keys.ElementAt(2));
-            Assert.IsTrue(home.CheckToolTipIsDisplayed(benefits_collection.Values.ElementAt(2)));
+            PageWrapper.home.DismissOfertaZileAndAcceptCookies();
+            PageWrapper.home.HoverOverBenefitsElement(benefits_collection.Keys.ElementAt(2));
+            Assert.IsTrue(PageWrapper.home.CheckToolTipIsDisplayed(benefits_collection.Values.ElementAt(2)));
         }
 
         /// <summary>
@@ -142,10 +131,9 @@ namespace EMagTest.TestSuite
         [Test]
         public void RaiffeisenCardToolTipDisplayTest()
         {
-            HomePage home = new HomePage(driver);
-            home.DismissOfertaZileAndAcceptCookies();
-            home.HoverOverBenefitsElement(benefits_collection.Keys.ElementAt(3));
-            Assert.IsTrue(home.CheckToolTipIsDisplayed(benefits_collection.Values.ElementAt(3)));
+            PageWrapper.home.DismissOfertaZileAndAcceptCookies();
+            PageWrapper.home.HoverOverBenefitsElement(benefits_collection.Keys.ElementAt(3));
+            Assert.IsTrue(PageWrapper.home.CheckToolTipIsDisplayed(benefits_collection.Values.ElementAt(3)));
         }
 
         /// <summary>
@@ -154,26 +142,24 @@ namespace EMagTest.TestSuite
         [Test]
         public void DaruiesteVoucherToolTipDisplayTest()
         {
-            HomePage home = new HomePage(driver);
-            home.DismissOfertaZileAndAcceptCookies();
-            home.HoverOverBenefitsElement(benefits_collection.Keys.ElementAt(4));
-            Assert.IsTrue(home.CheckToolTipIsDisplayed(benefits_collection.Values.ElementAt(4)));
+            PageWrapper.home.DismissOfertaZileAndAcceptCookies();
+            PageWrapper.home.HoverOverBenefitsElement(benefits_collection.Keys.ElementAt(4));
+            Assert.IsTrue(PageWrapper.home.CheckToolTipIsDisplayed(benefits_collection.Values.ElementAt(4)));
         }
 
-       /// <summary>
-       /// Assert the test switces to an IFrame, idenfies an element within the IFrame, clicks on it 
-       /// & you are redirected to the correct page.
-       /// </summary>
+        /// <summary>
+        /// Assert the test switces to an IFrame, idenfies an element within the IFrame, clicks on it 
+        /// & you are redirected to the correct page.
+        /// </summary>
         [Test]
         public void TestOfertaZileiCarouselLink()
         {
-            HomePage home = new HomePage(driver);
-            home.DismissOfertaZileAndAcceptCookies();
-            home.Refresh();
-            home.CarouselDotsClick(1);
-            home.SwitchToIFrame();
-            home.ClickOnIframeLink();
-            Assert.IsTrue(home.PageTitleContains(OfertaZileiPageTitle));
+            PageWrapper.home.DismissOfertaZileAndAcceptCookies();
+            PageWrapper.home.Refresh();
+            PageWrapper.home.CarouselDotsClick(1);
+            PageWrapper.home.SwitchToIFrame();
+            PageWrapper.home.ClickOnIframeLink();
+            Assert.IsTrue(PageWrapper.home.PageTitleContains(OfertaZileiPageTitle));
 
         }
 

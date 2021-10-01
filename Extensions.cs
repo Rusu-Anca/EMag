@@ -16,6 +16,12 @@ namespace EMagTest
             element.SendKeys(text);
         }
 
+        /// <summary>
+        /// Check element is displayed/not displayed and write the name of the element.
+        /// </summary>
+        /// <param name="element">Extension method for the web element.</param>
+        /// <param name="elemName">The name of the element we're checking if it's displayed.</param>
+        /// <returns>True if the element is displayed, false otherwise.</returns>
         public static bool IsDisplayed(this IWebElement element, string elemName)
         {
             bool result;
@@ -83,6 +89,25 @@ namespace EMagTest
             action.MoveToElement(element);
             action.Perform();
 
+        }
+
+
+        /// <summary>Selects a radio button if is not selected</summary>
+        /// <param name="element">A checkbox or radio button.</param>
+        /// <returns></returns>
+        public static void SelectElement(this IWebElement element)
+        {
+            if (element.GetAttribute("checked") == null) element.Click();
+        }
+
+        /// <summary>Checks if an element has a specific attribute present.</summary>
+        /// <param name="element">this instance element</param>
+        /// <param name="attribute">The attribute to look for</param>
+        /// <returns>True if the element contains the attribute, false if otherwise</returns>
+        public static bool HasAttribute(this IWebElement element, string attribute, string attributeValue)
+        {
+            var elementAttribute = element.GetAttribute(attribute);
+            return elementAttribute == attributeValue;
         }
     }
 }

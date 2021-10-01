@@ -8,7 +8,7 @@ using System.Threading;
 namespace EMagTest.Pages
 {
 
-    public class HomePage : PageActions
+    public class HomePage : PageBase
     {
         
         public By acceptCokkies_locator => By.ClassName("js-accept");

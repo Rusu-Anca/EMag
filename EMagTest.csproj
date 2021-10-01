@@ -25,6 +25,8 @@
 
   <ItemGroup>
     <Folder Include="Resources\ChromeDriver\" />
+    <Folder Include="Resources\FireFoxDriver\" />
+    <Folder Include="Resources\EdgeDriver\" />
   </ItemGroup>
 
 </Project>

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace EMagTest.Pages
 {
-    class SideMenu : PageActions
+    public class SideMenu : PageBase
     {
 
         public SideMenu(IWebDriver driver) : base(driver)

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace EMagTest.Pages
 {
-    class EMagGeniusPage: PageActions
+    public class EMagGeniusPage: PageBase
     {
 
         public EMagGeniusPage(IWebDriver driver): base(driver)

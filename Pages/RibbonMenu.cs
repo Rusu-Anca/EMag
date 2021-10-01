@@ -5,7 +5,7 @@ using System.Text;
 
 namespace EMagTest.Pages
 {
-    class RibbonMenu : PageActions
+    public class RibbonMenu : PageBase
     {
 
         public RibbonMenu(IWebDriver driver) : base(driver)

@@ -6,7 +6,7 @@ using System.Text;
 
 namespace EMagTest.Pages
 {
-    class LoginPage : PageActions
+    public class LoginPage : PageBase
     {
 
         public LoginPage(IWebDriver driver) : base(driver)
@@ -31,6 +31,7 @@ namespace EMagTest.Pages
         public By gmailNextButton_locator => By.CssSelector(".qhFLie .VfPpkd-vQzf8d");
         public By gmailPassword_locator => By.CssSelector("input[type='password']");
 
+        
 
 
         /* public void InputEmail(string testName)
