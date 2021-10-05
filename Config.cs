@@ -24,8 +24,15 @@ namespace EMagTest
 
             public static class ValidGmail
             {
-                public static string Email = "i1.anca.e.david@gmail.com";
-                public static string Password = "WakeMe8!UP!";
+                public static string Email = "....";
+                public static string Password = "...";
+            }
+
+            public static class ValidFacebook
+            {
+                public static string Email = "anca_e_david@yahoo.com";
+                public static string Password = "punch41book";
+                public static string SocialEmailPassword = "Punch5bk";
             }
 
             public static class Invalid
