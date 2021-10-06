@@ -1,4 +1,5 @@
 ﻿using EMagTest.HelperMethods;
+using EMagTest.WebDriverFactory;
 using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
@@ -8,9 +9,9 @@ namespace EMagTest.Pages.CategoryProductsPage
 {
     public class TopFilters : PageBase
     {
-        public TopFilters(IWebDriver driver) : base(driver)
+       /* public TopFilters(IWebDriver driver) : base(driver)
         {
-        }
+        }*/
 
         public By activeFilters_locator => By.CssSelector(".listing-active-filters-holder .input-group-sm .js-filter-select a");
 
@@ -37,7 +38,7 @@ namespace EMagTest.Pages.CategoryProductsPage
         public bool CheckActiveFilterDisplay(string filterName, int index)
         {
             bool result = false;
-            IList<IWebElement> activeFilter = driver.FindElements(activeFilters_locator);
+            IList<IWebElement> activeFilter = Browser.Current.FindElements(activeFilters_locator);
             Console.WriteLine(activeFilter[index].Text);
             if (activeFilter[index].Text.Contains(filterName))
             {
@@ -55,10 +56,10 @@ namespace EMagTest.Pages.CategoryProductsPage
         public bool CheckStaticFilterDisplay(string filterName)
         {
             bool result = false;
-            IReadOnlyCollection<IWebElement> staticFilter = driver.FindElements(staticFilters_locators, 20);
+            IReadOnlyCollection<IWebElement> staticFilter = Browser.FindElements(staticFilters_locators);
             foreach (IWebElement filter in staticFilter)
             {
-                driver.ActionsMouseHover(filter);
+                Browser.Current.ActionsMouseHover(filter);
                 Console.WriteLine(filter.Text);
                 if (filter.Text.Contains(filterName))
                 {
@@ -86,7 +87,7 @@ namespace EMagTest.Pages.CategoryProductsPage
         public string ClickDropdownFilterOption(string filterHeaderName)
         {
             string selectedFilter = null;
-            IReadOnlyCollection<IWebElement> filtersHeaderList = driver.FindElements(filtersHeader_locator, 20);
+            IReadOnlyCollection<IWebElement> filtersHeaderList = Browser.FindElements(filtersHeader_locator);
             foreach (IWebElement filterHeader in filtersHeaderList)
             {
                 if (filterHeader.Text.Contains(filterHeaderName))
@@ -109,7 +110,7 @@ namespace EMagTest.Pages.CategoryProductsPage
         public string SelectFilterOption(string filterOptionName)
         {
             string selectedFilters = null;
-            IReadOnlyCollection<IWebElement> filterOptionsList = driver.FindElements(filterOptions_locator, 20);
+            IReadOnlyCollection<IWebElement> filterOptionsList = Browser.FindElements(filterOptions_locator);
             foreach (IWebElement filterOption in filterOptionsList)
             {
                 Console.WriteLine(filterOption.Text);
@@ -133,11 +134,11 @@ namespace EMagTest.Pages.CategoryProductsPage
         /// <param name="filterHeaderName">The name of the filter for which you want to remove the filter option(s).</param>
         public void ClickOnRemoveFilterOptionButton(string filterHeaderName)
         {
-            IReadOnlyCollection<IWebElement> filtersHeaderList = driver.FindElements(filtersHeader_locator, 20);
-            WebElementsHelperMethdos.ClickOnCollectionElementIfMatches(filtersHeaderList, filterHeaderName);
+            IReadOnlyCollection<IWebElement> filtersHeaderList = Browser.FindElements(filtersHeader_locator);
+            WebElementsHelperMethods.ClickOnCollectionElementIfMatches(filtersHeaderList, filterHeaderName);
         }
 
-        public void ClickOnOrdoneazaDropdown() => driver.FindElement(ordoneazaDropdown_locator).Click();
+        public void ClickOnOrdoneazaDropdown() => Browser.ClickWebElement(ordoneazaDropdown_locator);
 
         /// <summary>
         /// 
@@ -145,8 +146,8 @@ namespace EMagTest.Pages.CategoryProductsPage
         /// <param name="sortOption"></param>
         public void SelectOrdoneazaOption(string sortOption)
         {
-            IReadOnlyCollection<IWebElement> ordoneazaOptionList = driver.FindElements(ordoneazaOptions_locator);
-            WebElementsHelperMethdos.ClickOnCollectionElementIfMatches(ordoneazaOptionList, sortOption);
+            IReadOnlyCollection<IWebElement> ordoneazaOptionList = Browser.FindElements(ordoneazaOptions_locator);
+            WebElementsHelperMethods.ClickOnCollectionElementIfMatches(ordoneazaOptionList, sortOption);
 
         }
     }

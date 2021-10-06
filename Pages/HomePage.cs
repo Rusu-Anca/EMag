@@ -1,4 +1,5 @@
 ﻿
+using EMagTest.WebDriverFactory;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using System;
@@ -10,7 +11,7 @@ namespace EMagTest.Pages
 
     public class HomePage : PageBase
     {
-        
+
         public By acceptCokkies_locator => By.ClassName("js-accept");
         public By closeOfertaZIlei_locator => By.ClassName("close");
 
@@ -42,34 +43,32 @@ namespace EMagTest.Pages
 
 
 
-        public HomePage(IWebDriver driver) : base(driver)
-        {
-        }
+        /*  public HomePage(IWebDriver driver) : base(driver)
+          {
+          }
 
+          */
 
-        public bool AssertTitle(string expected) => driver.Title.Equals(expected);
-        public void AcceptCookies() => driver.FindElement(acceptCokkies_locator, 10, displayed: true).Click();
-        public void ClickOnToolTipLink() => driver.FindElement(toolTipLink_locator, 5, displayed: true).Click();
+        public bool AssertTitle(string expected) => Browser.PageTitleContains(expected);
+        public void AcceptCookies() => Browser.ClickWebElement(acceptCokkies_locator);
+        public void ClickOnToolTipLink() => Browser.ClickWebElement(toolTipLink_locator);
 
-        public void CloseOfertaZilei() => driver.FindElement(closeOfertaZIlei_locator, 10, displayed: true).Click();
+        public void CloseOfertaZilei() => Browser.ClickWebElement(closeOfertaZIlei_locator);
 
         /// <summary>
         /// Dismiss the Login notice.
         /// </summary>
         public void DismissLoghinNoticeBtn()
         {
-            Thread.Sleep(2000);
-            IWebElement dismissButon = driver.FindElement(dismissLoghinBtn_locator, 10, displayed: true);
-            IJavaScriptExecutor jsExecutor = (IJavaScriptExecutor)driver;
-            jsExecutor.ExecuteScript("arguments[0].click();", dismissButon);
+            Browser.ClickWebElement(dismissLoghinBtn_locator);
         }
 
-        public void IntraInContButton() => driver.FindElement(intraInContBtn_location).Click();
+        public void IntraInContButton() => Browser.ClickWebElement(intraInContBtn_location);
 
         /// <summary>
         /// Click on the Login button displayed on the banner.
         /// </summary>
-        public void NavigateToLoginPage() => driver.FindElement(BannerLogInButton_locator).Click();
+        public void NavigateToLoginPage() => Browser.ClickWebElement(BannerLogInButton_locator);
 
         /// <summary>
         /// Dismiss all banners & alerts.
@@ -88,13 +87,13 @@ namespace EMagTest.Pages
         /// <param name="benefitName">The benefit you want to hover over.</param>
         public void HoverOverBenefitsElement(string benefitName)
         {
-            IList<IWebElement> benefitsList = driver.FindElements(widgetBenefits_locator);
+            IReadOnlyCollection<IWebElement> benefitsList = Browser.FindElements(widgetBenefits_locator);
 
             foreach (IWebElement elem in benefitsList)
             {
                 if (elem.Text.Equals(benefitName))
                 {
-                    driver.ActionsMouseHover(elem);
+                    Browser.Current.ActionsMouseHover(elem);
                     break;
                 }
             }
@@ -107,7 +106,7 @@ namespace EMagTest.Pages
         /// <param name="benefitName">The benefit you want to click on.</param>
         public void ClickOnBenefitsElement(string benefitName)
         {
-            IReadOnlyCollection<IWebElement> benefitsList = driver.FindElements(widgetBenefits_locator, 10);
+            IReadOnlyCollection<IWebElement> benefitsList = Browser.FindElements(widgetBenefits_locator);
 
             foreach (IWebElement elem in benefitsList)
             {
@@ -128,7 +127,7 @@ namespace EMagTest.Pages
         {
             bool result = false;
 
-            IList<IWebElement> tooltips = driver.FindElements(toolTipPane_locator);
+            IReadOnlyCollection<IWebElement> tooltips = Browser.FindElements(toolTipPane_locator);
 
             foreach (IWebElement toolTip in tooltips)
             {
@@ -149,23 +148,23 @@ namespace EMagTest.Pages
         /// <param name="index">Is the  dot's index, within the list. that you want to click.</param>
         public void CarouselDotsClick(int index)
         {
-            IList<IWebElement> dots = driver.FindElements(BannerCarouselDots_locator);
+            IList<IWebElement> dots = Browser.Current.FindElements(BannerCarouselDots_locator);
 
             dots[index].Click();
         }
 
-        public void CarouselLeftArrowClick() => driver.FindElement(CarouselLeftArrow_locator).Click();
-        public void CarouselRightArrowClick() => driver.FindElement(CarouselRightArrow_locator).Click();
+        public void CarouselLeftArrowClick() => Browser.ClickWebElement(CarouselLeftArrow_locator);
+        public void CarouselRightArrowClick() => Browser.ClickWebElement(CarouselRightArrow_locator);
 
         /// <summary>
         /// Switch to Oferta Zilei IFrame.
         /// </summary>
-        public void SwitchToIFrame() => driver.SwitchTo().Frame(OfertaZileiIFrame_ID);
+        public void SwitchToIFrame() => Browser.SwitchTo(OfertaZileiIFrame_ID);
 
         /// <summary>
         /// Click on IFrame from the carousel to navigate to it's page.
         /// </summary>
-        public void ClickOnIframeLink() => driver.FindElement(IFrameLink_locator).Click();
+        public void ClickOnIframeLink() => Browser.ClickWebElement(IFrameLink_locator);
 
 
 

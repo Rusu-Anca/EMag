@@ -1,38 +1,23 @@
-﻿using OpenQA.Selenium;
+﻿using EMagTest.WebDriverFactory;
+using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace EMagTest.Pages
 {
-    class FavoritesPage 
+    class FavoritesPage : PageBase
     {
-
-        public readonly FavoritesPageMap Map;
-
-       
-        public FavoritesPage(IWebDriver driver)
+        
+       /* public FavoritesPage(IWebDriver driver) : base(driver)
         {
-            Map = new FavoritesPageMap(driver);
-        }
-
-       
+        }*/
 
 
-       public class FavoritesPageMap
-        {
-            IWebDriver driver;
-            public FavoritesPageMap(IWebDriver driver)
-            {
-                this.driver = driver;
-            }
+        public By cardContainer_locator => By.ClassName("card-container");
 
-            public By cardContainer_locator => By.ClassName("card-container");
-
-            public IReadOnlyCollection<IWebElement> cardContainer => driver.FindElements(cardContainer_locator);
-        }
-
-
-
+        public IReadOnlyCollection<IWebElement> cardContainer => Browser.FindElements(cardContainer_locator);
     }
+
+
 }

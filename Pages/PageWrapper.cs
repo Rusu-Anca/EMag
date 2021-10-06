@@ -1,4 +1,5 @@
 ﻿using EMagTest.Pages.CategoryProductsPage;
+using EMagTest.Pages.MyAccount;
 using EMagTest.WebDriverFactory;
 using System;
 using System.Collections.Generic;
@@ -18,20 +19,22 @@ namespace EMagTest.Pages
         public static SideFilter sideFilter;
         public static TopFilters topFilters;
         public static EMagGeniusPage eMagGenius;
+        public static ContulMeuPage contulMeuPage;
 
         public static void Init()
         {
-            home = new HomePage(Browser.Current);
-            login = new LoginPage(Browser.Current);
-            ribbonMenu = new RibbonMenu(Browser.Current);
-            sideMenu = new SideMenu(Browser.Current);
-            userMenuBar = new UserMenuBar(Browser.Current);
-            product = new Product(Browser.Current);
-            sideFilter = new SideFilter(Browser.Current);
-            topFilters = new TopFilters(Browser.Current);
-            eMagGenius = new EMagGeniusPage(Browser.Current);
-
-        }
+            home = new HomePage();
+            login = new LoginPage();
+            ribbonMenu = new RibbonMenu();
+            sideMenu = new SideMenu();
+            userMenuBar = new UserMenuBar();
+            product = new Product();
+            sideFilter = new SideFilter();
+            topFilters = new TopFilters();
+            eMagGenius = new EMagGeniusPage();
+            contulMeuPage = new ContulMeuPage();
 
     }
+
+}
 }

@@ -7,18 +7,21 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Threading;
 using static EMagTest.WebDriverFactory.Browser;
 
 namespace EMagTest.TestSuite
 {
     class LogInTest
     {
+        public const string AccountNameWelcome = "Salut, Rusu Ancuta Elena";
 
         [SetUp]
         public void Setup()
         {
             Browser.Init(BrowserName.Chrome);
-            Browser.Loadpage(Config.BaseURL);
+            Browser.GoTo(Config.BaseURL);
+            Browser.WindowMaximize();
             PageWrapper.Init();
         }
 
@@ -34,8 +37,6 @@ namespace EMagTest.TestSuite
         [Test]
         public void LogInSuccessTest()
         {
-
-
             PageWrapper.login.LogIn(Config.LogInURL, Config.Credentials.Valid.Email, Config.Credentials.Valid.Password);
         }
 
@@ -45,12 +46,21 @@ namespace EMagTest.TestSuite
         [Test]
         public void LogInWithGoogleAccount()
         {
-
-            PageWrapper.login.GoToURL(Config.LogInURL);
+            Browser.GoTo(Config.LogInURL);
             PageWrapper.login.LogInWithGmail(Config.LogInURL, Config.Credentials.ValidGmail.Email, Config.Credentials.ValidGmail.Password);
-
-
         }
 
+        /// <summary>
+        /// Login using Facebook credentials, and check that the correct account name is displayed.
+        /// </summary>
+        [Test]
+        public void LoginWithFacebook()
+        {
+            Browser.GoTo(Config.LogInURL);
+            PageWrapper.login.LoginWithFacebook(Config.Credentials.ValidFacebook.Email, Config.Credentials.ValidFacebook.Password, Config.Credentials.ValidFacebook.SocialEmailPassword);
+            Thread.Sleep(1000);
+            Assert.IsTrue(PageWrapper.userMenuBar.CheckAccountName(AccountNameWelcome));
+
+        }
     }
 }

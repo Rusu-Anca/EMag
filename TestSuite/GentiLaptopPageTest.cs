@@ -26,8 +26,8 @@ namespace EMagTest.TestSuite
         public List<string> PageActiveFilterHeaders = new List<string>() { "Disponibilitate", "Rating minim", "Disponibil prin easybox", "Functii", "Material", "Tip inchidere" };
         public List<string> NavigationButtons = new List<string>() { "Pagina anterioara", "1", "2", "60", "61", "Pagina urmatoare" };
         public const string DropdownDefaultValue = "Selecteaza...";
-        public const string Product1Title = "Geanta laptop Thule Paramount 10.5\", Negru";
-       // static string[] productName = { Product2Title, Product3Title };
+        public const string Product1Title = "Rucsac Laptop Targus Newport 12\" Mini";
+        // static string[] productName = { Product2Title, Product3Title };
         public const string Product2Title = "Husa Laptop Trust Primo, 15.6\", Negru";
         public const string Product3Title = "Rucsac Laptop A+ Reno, 15,6\", Black/Red";
 
@@ -36,7 +36,8 @@ namespace EMagTest.TestSuite
         public void Setup()
         {
             Browser.Init(BrowserName.Chrome);
-            Browser.Loadpage(Config.GentiLaptopPageURL);
+            Browser.GoTo(Config.GentiLaptopPageURL);
+            Browser.WindowMaximize();
             PageWrapper.Init();
         }
 
@@ -53,13 +54,12 @@ namespace EMagTest.TestSuite
         [Test]
         public void NavigateToProductsCategoryPageFromMenu()
         {
-            //RibbonMenu rbMenu = new RibbonMenu(Browser.Current);
-            PageWrapper.login.LoadComplete();
+            Browser.LoadComplete(10);
             PageWrapper.ribbonMenu.HoverOnMenuClickSubmenuItem(Department);
             PageWrapper.sideMenu.ClickOnProductCategorySideMenu(ProductCategory);
             Thread.Sleep(1000);
             PageWrapper.sideMenu.ClickOnLaptopCategory();
-            Assert.AreEqual(PageWrapper.sideMenu.GetPageTitle(), LaptopPageTitle);
+            Assert.AreEqual(Browser.GetPageTitle(), LaptopPageTitle);
 
         }
 
@@ -83,9 +83,8 @@ namespace EMagTest.TestSuite
         {
             PageWrapper.home.DismissOfertaZileAndAcceptCookies();
             PageWrapper.sideFilter.SelectEmagGeniusFilter(EMagGeniusFilter_ToateProdusele);
-            TopFilters topFilters = new TopFilters(Browser.Current);
             Thread.Sleep(1000);
-            Assert.IsTrue(topFilters.CheckActiveFilterDisplay(EMagGeniusFilter_ToateProdusele, 0));
+            Assert.IsTrue(PageWrapper.topFilters.CheckActiveFilterDisplay(EMagGeniusFilter_ToateProdusele, 0));
         }
 
         /// <summary>
@@ -97,8 +96,7 @@ namespace EMagTest.TestSuite
             PageWrapper.home.DismissOfertaZileAndAcceptCookies();
             PageWrapper.sideFilter.SelectDisponibilitateFilter(DisponibilitateaOptions[1]);
             Thread.Sleep(1000);
-            TopFilters topFilters = new TopFilters(Browser.Current);
-            Assert.IsTrue(topFilters.CheckActiveFilterDisplay(DisponibilitateaOptions[1], 0));
+            Assert.IsTrue(PageWrapper.topFilters.CheckActiveFilterDisplay(DisponibilitateaOptions[1], 0));
         }
 
         /// <summary>
@@ -152,11 +150,9 @@ namespace EMagTest.TestSuite
         public void CheckdropdownDefaultValueWhenRemoveFilterOptions()
         {
             PageWrapper.home.DismissOfertaZileAndAcceptCookies();
-            SideFilter filter = new SideFilter(Browser.Current);
-            filter.SelectDisponibilitateFilter(DisponibilitateaOptions[1]);
-            TopFilters topFilters = new TopFilters(Browser.Current);
-            topFilters.ClickOnRemoveFilterOptionButton(PageActiveFilterHeaders[0]);
-            string dropdownValue = topFilters.ClickDropdownFilterOption(PageStaticFilterHeaders[2]);
+            PageWrapper.sideFilter.SelectDisponibilitateFilter(DisponibilitateaOptions[1]);
+            PageWrapper.topFilters.ClickOnRemoveFilterOptionButton(PageActiveFilterHeaders[0]);
+            string dropdownValue = PageWrapper.topFilters.ClickDropdownFilterOption(PageStaticFilterHeaders[2]);
             Assert.AreEqual(DropdownDefaultValue, dropdownValue);
 
         }
@@ -168,9 +164,8 @@ namespace EMagTest.TestSuite
         public void SelectStaticFilterAndCheckCorrectProductsAreDisplayed()
         {
             PageWrapper.home.DismissOfertaZileAndAcceptCookies();
-            TopFilters topFilters = new TopFilters(Browser.Current);
-            topFilters.ClickDropdownFilterOption(PageStaticFilterHeaders[2]);
-            topFilters.SelectFilterOption(BrandFilterOptions[0]);
+            PageWrapper.topFilters.ClickDropdownFilterOption(PageStaticFilterHeaders[2]);
+            PageWrapper.topFilters.SelectFilterOption(BrandFilterOptions[0]);
             Console.WriteLine(PageWrapper.product.CheckProductsTitleContains(BrandFilterOptions[0]));
             Thread.Sleep(2500);
             Assert.IsTrue(PageWrapper.product.CheckProductsTitleContains(BrandFilterOptions[0]));
@@ -183,9 +178,8 @@ namespace EMagTest.TestSuite
         public void AddProdcutToFavoriteListANDCheckConfirmationMessage()
         {
             PageWrapper.home.DismissOfertaZileAndAcceptCookies();
-            TopFilters topFilters = new TopFilters(Browser.Current);
-            topFilters.ClickDropdownFilterOption(PageStaticFilterHeaders[2]);
-            topFilters.SelectFilterOption(BrandFilterOptions[0]);
+            PageWrapper.topFilters.ClickDropdownFilterOption(PageStaticFilterHeaders[2]);
+            PageWrapper.topFilters.SelectFilterOption(BrandFilterOptions[2]);
             Thread.Sleep(2000);
             PageWrapper.product.AddProductToFavoritesList(Product1Title);
             Assert.IsTrue(PageWrapper.product.FavoriteSuccessMessage());

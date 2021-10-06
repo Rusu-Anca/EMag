@@ -8,10 +8,10 @@ namespace EMagTest.Pages
     public class EMagGeniusPage: PageBase
     {
 
-        public EMagGeniusPage(IWebDriver driver): base(driver)
+       /* public EMagGeniusPage(IWebDriver driver): base(driver)
         {
 
-        }
+        }*/
 
         
     }

@@ -1,4 +1,6 @@
-﻿using OpenQA.Selenium;
+﻿using EMagTest.HelperMethods;
+using EMagTest.WebDriverFactory;
+using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,10 +10,10 @@ namespace EMagTest.Pages.CategoryProductsPage
     public class SideFilter : PageBase
     {
 
-        public SideFilter(IWebDriver driver) : base(driver)
+      /*  public SideFilter(IWebDriver driver) : base(driver)
         {
         }
-
+      */
         public By sideFilterHeader_locator => By.CssSelector(".filter-default  .filter-head");
 
         public By disponibilitateFilterOptions_locator => By.CssSelector(".filter-default #js-filter-6407-collapse a");
@@ -25,7 +27,7 @@ namespace EMagTest.Pages.CategoryProductsPage
 
 
 
-        public void ExpandEMagFilter() => driver.FindElement(eMagGeniusFilter_locator).Click();
+        public void ExpandEMagFilter() => Browser.ClickWebElement(eMagGeniusFilter_locator);
 
         /// <summary>
         /// Search within the filters header list for a filter and expand or collapse the filter to view/hide options.
@@ -33,7 +35,7 @@ namespace EMagTest.Pages.CategoryProductsPage
         /// <param name="filterName"></param>
         public void ExpandCollapseFilter(string filterName)
         {
-            IList<IWebElement> filterList = driver.FindElements(sideFilterHeader_locator);
+            IReadOnlyCollection<IWebElement> filterList = Browser.FindElements(sideFilterHeader_locator);
             foreach (IWebElement filter in filterList)
             {
                 if (filter.Text.Contains(filterName))
@@ -52,7 +54,7 @@ namespace EMagTest.Pages.CategoryProductsPage
         public bool FilterOptionsDisplayed(string filterOption)
         {
             bool result = false;
-            IList<IWebElement> eMagGeniusFilters = driver.FindElements(eMagGeniusFilterOptions_locator);
+            IReadOnlyCollection<IWebElement> eMagGeniusFilters = Browser.FindElements(eMagGeniusFilterOptions_locator);
             foreach (IWebElement filter in eMagGeniusFilters)
             {
                 Console.WriteLine(filter.Text);
@@ -74,7 +76,7 @@ namespace EMagTest.Pages.CategoryProductsPage
         /// <param name="filterOption">It's the filter option's name that is ticked.</param>
         public void SelectEmagGeniusFilter(string filterOption)
         {
-            IList<IWebElement> eMagGeniusFilters = driver.FindElements(eMagGeniusFilterOptions_locator);
+            IReadOnlyCollection<IWebElement> eMagGeniusFilters = Browser.FindElements(eMagGeniusFilterOptions_locator);
             foreach (IWebElement filter in eMagGeniusFilters)
             {
                 Console.WriteLine(filter.Text);
@@ -89,19 +91,11 @@ namespace EMagTest.Pages.CategoryProductsPage
 
         public void SelectDisponibilitateFilter(string disponibilitateFilter)
         {
-            IList<IWebElement> filterList = driver.FindElements(disponibilitateFilterOptions_locator);
-            foreach (IWebElement option in filterList)
-            {
-                if (option.Text.Contains(disponibilitateFilter))
-                {
-                    option.Click();
-                    break;
-                }
-            }
-
+            IReadOnlyCollection<IWebElement> filterList = Browser.FindElements(disponibilitateFilterOptions_locator);
+            WebElementsHelperMethods.ClickOnCollectionElementIfMatches(filterList, disponibilitateFilter);
         }
 
-        public void StergeToateFiltrele() => driver.FindElement(stergeToateFiltrele_locator, 5, displayed: true).Click();
+        public void StergeToateFiltrele() => Browser.ClickWebElement(stergeToateFiltrele_locator);
 
 
         /// <summary>
@@ -109,13 +103,13 @@ namespace EMagTest.Pages.CategoryProductsPage
         /// </summary>
         public void ScrollAndSelectBrandFilter(string brandNameFilter)
         {
-            IList<IWebElement> brandFilters = driver.FindElements(brandFilterOptions_locator);
+            IReadOnlyCollection<IWebElement> brandFilters = Browser.FindElements(brandFilterOptions_locator);
             foreach (IWebElement filter in brandFilters)
             {
                 Console.WriteLine(filter.Text);
                 if (filter.Text.Contains(brandNameFilter))
                 {
-                    driver.ActionsMouseHover(filter);
+                    Browser.Current.ActionsMouseHover(filter);
                     filter.Click();
                     break;
                 }
