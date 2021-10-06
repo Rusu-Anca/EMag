@@ -35,7 +35,8 @@ namespace EMagTest.TestSuite
         public void Setup()
         {
             Browser.Init(BrowserName.Chrome);
-            Browser.Loadpage(Config.BaseURL);
+            Browser.GoTo(Config.BaseURL);
+            Browser.WindowMaximize();
             PageWrapper.Init();
         }
 
@@ -59,7 +60,7 @@ namespace EMagTest.TestSuite
         }
 
         /// <summary>
-        /// Check you can dismiss the Login banner.
+        /// Check you can also dismiss the Login banner.
         /// </summary>
         [Test]
         public void DismissLoginButtonTest()
@@ -74,7 +75,7 @@ namespace EMagTest.TestSuite
         public void EMagGeniusBenefitRedirectTest()
         {
             PageWrapper.home.ClickOnBenefitsElement(benefits_collection.Keys.ElementAt(0));
-            Assert.AreEqual(PageWrapper.eMagGenius.GetPageTitle(), eMagGeniusPage_Title);
+            Assert.AreEqual(Browser.GetPageTitle(), eMagGeniusPage_Title);
 
         }
 
@@ -88,7 +89,7 @@ namespace EMagTest.TestSuite
             PageWrapper.home.DismissOfertaZileAndAcceptCookies();
             PageWrapper.home.HoverOverBenefitsElement(benefits_collection.Keys.ElementAt(0));
             PageWrapper.home.ClickOnToolTipLink();
-            Assert.AreEqual(PageWrapper.eMagGenius.GetPageTitle(), eMagGeniusPage_Title);
+            Assert.AreEqual(Browser.GetPageTitle(), eMagGeniusPage_Title);
 
         }
 
@@ -150,16 +151,18 @@ namespace EMagTest.TestSuite
         /// <summary>
         /// Assert the test switces to an IFrame, idenfies an element within the IFrame, clicks on it 
         /// & you are redirected to the correct page.
+        /// NOTE!!!: the order of the iframes changes constantly, most probably you'll get redirected to a dofferent page, and the test will fail.
+        /// Just change the expected page title with the one returned by the test output.
         /// </summary>
         [Test]
         public void TestOfertaZileiCarouselLink()
         {
             PageWrapper.home.DismissOfertaZileAndAcceptCookies();
-            PageWrapper.home.Refresh();
+            Browser.Refresh();
             PageWrapper.home.CarouselDotsClick(1);
             PageWrapper.home.SwitchToIFrame();
             PageWrapper.home.ClickOnIframeLink();
-            Assert.IsTrue(PageWrapper.home.PageTitleContains(OfertaZileiPageTitle));
+            Assert.IsTrue(Browser.PageTitleContains(OfertaZileiPageTitle));
 
         }
 

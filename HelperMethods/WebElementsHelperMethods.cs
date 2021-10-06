@@ -6,14 +6,20 @@ using System.Threading;
 
 namespace EMagTest.HelperMethods
 {
-    public static class WebElementsHelperMethdos
+    public static class WebElementsHelperMethods
     {
-        public static bool ElementInTheListIsDisplayed(IReadOnlyCollection<IWebElement> elementCollection, string filterName)
+        /// <summary>
+        /// Iterate through the list of displayed web elements and check if the searched element is present.
+        /// </summary>
+        /// <param name="elementCollection">The web element list.</param>
+        /// <param name="elementName">The name/title of the web element.</param>
+        /// <returns>True if the element is displayed, False otherwise.</returns>
+        public static bool ElementInTheListIsDisplayed(IReadOnlyCollection<IWebElement> elementCollection, string elementName)
         {
             bool result = false;
             foreach (IWebElement element in elementCollection)
             {
-                if (element.Text.Contains(filterName))
+                if (element.Text.Contains(elementName))
                 {
                     result = true;
                     break;

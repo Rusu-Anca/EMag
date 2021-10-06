@@ -1,4 +1,6 @@
-﻿using OpenQA.Selenium;
+﻿using EMagTest.HelperMethods;
+using EMagTest.WebDriverFactory;
+using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,10 +10,10 @@ namespace EMagTest.Pages
     public class SideMenu : PageBase
     {
 
-        public SideMenu(IWebDriver driver) : base(driver)
+       /* public SideMenu(IWebDriver driver) : base(driver)
         {
         }
-
+       */
         public By sideMenuElementsList_locator => By.CssSelector(".emg-aside-links li");
         public By sideMenuLaptopCateg_locator => By.XPath("//*[@class='emg-aside-links']/li[1]/a");  //.sidebar-tree-subdepartment .sidebar-tree-item" 
 
@@ -19,19 +21,13 @@ namespace EMagTest.Pages
 
         public void ClickOnProductCategorySideMenu(string expectedCategory)
         {
-            IList<IWebElement> productCategoryList = driver.FindElements(sideMenuElementsList_locator);
+            IReadOnlyCollection<IWebElement> productCategoryList = Browser.FindElements(sideMenuElementsList_locator);
 
-            foreach (IWebElement productCateg in productCategoryList)
-            {
-                if (productCateg.Text.Equals(expectedCategory))
-                {
-                    productCateg.Click();
-                    break;
-                }
-            }
+            WebElementsHelperMethods.ClickOnCollectionElementIfMatches(productCategoryList, expectedCategory);
+
         }
 
-        public void ClickOnLaptopCategory() => driver.FindElement(sideMenuLaptopCateg_locator, 5, displayed: true).Click();
+        public void ClickOnLaptopCategory() => Browser.ClickWebElement(sideMenuLaptopCateg_locator);
 
     }
 }
