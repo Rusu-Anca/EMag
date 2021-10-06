@@ -23,7 +23,7 @@ namespace EMagTest.Pages
 
         public void NavigateTologInPage()
         {         
-            Browser.Current.ActionsMouseHover(Browser.Current.FindElement(myAccount_locator));
+            Browser.Current.ActionsMouseHover(Browser.FindElement(myAccount_locator));
             Browser.ClickWebElement(intraInCont_locator);
         }
 
@@ -33,7 +33,7 @@ namespace EMagTest.Pages
 
         public bool CheckAccountName(string accountName)
         {
-            Browser.Current.ActionsMouseHover(Browser.Current.FindElement(myAccount_locator, 5, displayed:true));
+            Browser.Current.ActionsMouseHover(Browser.FindElement(myAccount_locator));
             return Browser.FindElement(accountName_locator).Text.Equals(accountName);
         }
     }

@@ -13,7 +13,7 @@ namespace EMagTest.WebDriverFactory
 {
     public static class Browser
     {
-        [ThreadStatic]
+        
         private static IWebDriver _driver;
 
         /// <summary>
