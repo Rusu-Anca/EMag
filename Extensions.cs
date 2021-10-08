@@ -95,7 +95,7 @@ namespace EMagTest
         /// <summary>Selects a radio button if is not selected</summary>
         /// <param name="element">A checkbox or radio button.</param>
         /// <returns></returns>
-        public static void SelectElement(this IWebElement element)
+        public static void SelectRadioButton(this IWebElement element)
         {
             if (element.GetAttribute("checked") == null) element.Click();
         }
@@ -107,7 +107,13 @@ namespace EMagTest
         public static bool HasAttribute(this IWebElement element, string attribute, string attributeValue)
         {
             var elementAttribute = element.GetAttribute(attribute);
-            return elementAttribute == attributeValue;
+            return elementAttribute.Contains(attributeValue);
+        }
+
+        public static void SelectByText(this IWebElement element, string text)
+        {
+            SelectElement select = new SelectElement(element);
+            select.SelectByText(text);
         }
     }
 }

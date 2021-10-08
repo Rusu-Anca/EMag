@@ -20,6 +20,7 @@ namespace EMagTest.Pages
         public static TopFilters topFilters;
         public static EMagGeniusPage eMagGenius;
         public static ContulMeuPage contulMeuPage;
+        public static DatePersonalePage datePersonalePage;
 
         public static void Init()
         {
@@ -33,7 +34,7 @@ namespace EMagTest.Pages
             topFilters = new TopFilters();
             eMagGenius = new EMagGeniusPage();
             contulMeuPage = new ContulMeuPage();
-
+            datePersonalePage = new DatePersonalePage();
     }
 
 }

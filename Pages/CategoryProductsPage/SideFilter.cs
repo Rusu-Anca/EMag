@@ -61,7 +61,7 @@ namespace EMagTest.Pages.CategoryProductsPage
                 if (filter.Text.Contains(filterOption))
                 {
 
-                    filter.SelectElement();
+                    filter.SelectRadioButton();
                     result = true;
                     break;
                 }
@@ -83,7 +83,7 @@ namespace EMagTest.Pages.CategoryProductsPage
                 if (filter.Text.Contains(filterOption))
                 {
 
-                    filter.SelectElement();
+                    filter.SelectRadioButton();
                     break;
                 }
             }

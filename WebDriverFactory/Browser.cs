@@ -49,6 +49,22 @@ namespace EMagTest.WebDriverFactory
             Edge
         }
 
+        public enum Months
+        {
+            ianuarie=1,
+            februarie,
+            martie,
+            aprilie,
+            mai,
+            iunie,
+            iulie,
+            august,
+            septembrie,
+            octombrie,
+            noiembrie,
+            decembrie
+        }
+
         /// <summary>
         /// Navigate to a specific page..
         /// </summary>
@@ -126,17 +142,26 @@ namespace EMagTest.WebDriverFactory
         public static void DismissAlert() => _driver.SwitchTo().Alert().Dismiss();
 
         /// <summary>
-        /// Scroll to an element so that it is in view.
+        /// Scroll to element using By as param.
         /// </summary>
         /// <param name="by">By.</param>
         public static void ScrollToElement(By by)
         {
-            var e = _driver.FindElement(by);
+            var e = _driver.FindElement(by,5,displayed:true);
             ((IJavaScriptExecutor)_driver)
             .ExecuteScript("arguments[0].scrollIntoView(true);", e);
 
         }
 
+        /// <summary>
+        /// Scroll to element using webelement as param.
+        /// </summary>
+        /// <param name="element">IWebElement</param>
+        public static void ScrollToElement(IWebElement element)
+        {
+             _driver.ActionsMouseHover (element);
+           
+        }
         /// <summary>
         /// Click on a web element.
         /// </summary>
@@ -151,7 +176,7 @@ namespace EMagTest.WebDriverFactory
         /// </summary>
         /// <param name="by">By.</param>
         /// <returns>The webelement.</returns>
-        public static IWebElement FindElement(By by) => Current.FindElement(by, 10, displayed: true);
+        public static IWebElement FindElement(By by) => Current.FindElement(by, 15, displayed: true);
 
         /// <summary>
         /// Find a collection of webelements by By.

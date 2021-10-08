@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using EMagTest.WebDriverFactory;
+using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -39,6 +40,31 @@ namespace EMagTest.HelperMethods
             {
                 if (element.Text.Contains(elementName))
                 {
+                    element.Click();
+                    break;
+                }
+            }
+        }
+
+        public static void ClickOnCollectionElementIfAttributeMatches(IReadOnlyCollection<IWebElement> elementCollection, string attribute, string attributeName)
+        {
+            foreach (IWebElement element in elementCollection)
+            {
+                if (element.HasAttribute(attribute, attributeName))
+                {
+                    element.Click();
+                    break;
+                }
+            }
+        }
+
+        public static void ScrollAndClickOnCollectionElementIfMatches(IReadOnlyCollection<IWebElement> webElementCollection, string elementName)
+        {
+            foreach (IWebElement element in webElementCollection)
+            {
+                if (element.Text.Contains(elementName))
+                {
+                    Browser.ScrollToElement(element);
                     element.Click();
                     break;
                 }

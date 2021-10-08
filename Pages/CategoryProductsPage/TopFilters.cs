@@ -118,7 +118,7 @@ namespace EMagTest.Pages.CategoryProductsPage
                 {
 
                     selectedFilters = filterOption.Text;
-                    filterOption.SelectElement();
+                    filterOption.SelectRadioButton();
                     break;
                 }
 
