@@ -21,6 +21,7 @@ namespace EMagTest.Pages
         public static EMagGeniusPage eMagGenius;
         public static ContulMeuPage contulMeuPage;
         public static DatePersonalePage datePersonalePage;
+        public static FavoritesPage favoritesPage;
 
         public static void Init()
         {
@@ -35,6 +36,7 @@ namespace EMagTest.Pages
             eMagGenius = new EMagGeniusPage();
             contulMeuPage = new ContulMeuPage();
             datePersonalePage = new DatePersonalePage();
+            favoritesPage = new FavoritesPage();
     }
 
 }

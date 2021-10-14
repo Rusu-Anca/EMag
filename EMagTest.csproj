@@ -26,6 +26,7 @@
   <ItemGroup>
     <Folder Include="Resources\FireFoxDriver\" />
     <Folder Include="Resources\EdgeDriver\" />
+    <Folder Include="TestDataAccess\Photos\" />
   </ItemGroup>
 
 </Project>

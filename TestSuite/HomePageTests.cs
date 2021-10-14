@@ -31,22 +31,7 @@ namespace EMagTest.TestSuite
         public const string SubMenu = "Laptop, Tablete & Telefoane";
         public const string LaptopPageTitle = "Laptopuri - eMAG.ro";
 
-        [SetUp]
-        public void Setup()
-        {
-            Browser.Init(BrowserName.Chrome);
-            Browser.GoTo(Config.BaseURL);
-            Browser.WindowMaximize();
-            PageWrapper.Init();
-        }
-
-        [TearDown]
-        public void Close()
-        {
-            Browser.Close();
-        }
-
-
+       
         /// <summary>
         /// Check you can close Oferta zilei alert & accept Cookie.
         /// </summary>

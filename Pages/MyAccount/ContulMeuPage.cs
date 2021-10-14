@@ -10,10 +10,12 @@ namespace EMagTest.Pages.MyAccount
 {
     public class ContulMeuPage : PageBase
     {
-        
+
         public By panelHeader_locator => By.CssSelector(".user-dashboard-slot .widget-title");
 
         public By panelFooter_locator => By.CssSelector(".row .panel-footer a");
+
+        public By punctRidicareDesciption_locator => By.CssSelector(".pickup_point-slot .point-name");
 
         public By evalueazaExperientaNota_locator => By.ClassName("answers-col");
         public By userFeedbackMessage_locator => By.CssSelector(".user-feedback-form>div:nth-of-type(2) textarea");
@@ -29,12 +31,23 @@ namespace EMagTest.Pages.MyAccount
 
         public By select_localitate => By.Id("mb-ls-city");
 
-        public By punctRidicare => By.CssSelector(".mb-map-point-panel-container .js-overflowed-panel li");  
+        public By punctRidicare => By.CssSelector(".mb-map-point-panel-container .js-overflowed-panel li");
 
         public By saveButton_punctRidicareFavorit => By.ClassName("js-select-favorite-point");
 
         public By inapoiLaListaButton => By.ClassName("mb-map-point-details-back");
 
+        public By avatarLocator => By.CssSelector(".user-avatar .picture");
+
+        public By editAvatarButton => By.ClassName("js-edit-avatar");
+
+        public By avatarUpload_locator => By.CssSelector(".hidden .js-avatar-uploader"); //.edit-avatar .hidden input
+
+        public By avatarResizeKnob => By.ClassName("knob");
+
+        public By SaveAvatarButton => By.ClassName("js-save");
+
+        public By deleteAvatar => By.ClassName("js-avatar-delete");
 
         /// <summary>
         /// Iterate through the list of panels header that are displayed on the Contul Meu page, 
@@ -72,6 +85,9 @@ namespace EMagTest.Pages.MyAccount
             WebElementsHelperMethods.ClickOnCollectionElementIfMatches(panelLinkList, link);
             return new DatePersonalePage();
         }
+
+        public bool CheckPunctRidicareFavoritPanelDetails(string description) => Browser.FindElement(punctRidicareDesciption_locator).Text.Contains(description);
+
 
         /// <summary>
         /// Click on the Judet dropdown.
@@ -144,5 +160,31 @@ namespace EMagTest.Pages.MyAccount
             Thread.Sleep(500);
             ClickOnSavePunctRidicare();
         }
+
+        public void ClickOnEditAvatarButton() => Browser.ClickWebElement(editAvatarButton);
+
+        public void UploadAvatar(string photoName)
+        {
+            Browser.FindElement(avatarUpload_locator).SendKeys(@$"C:\Users\ancuta.rusu\source\repos\EMag\TestDataAccess\Photos\{photoName}.jpg");
+            Browser.ChangeAttributeValue(avatarResizeKnob, "style", "left: 10.0402%;");
+        }
+
+        public void DeleteAvatar()
+        {
+            ClickOnEditAvatarButton();
+            Browser.ClickWebElement(deleteAvatar);
+        }
+
+        /// <summary>
+        /// Check if the list of avatars displayed contains 2 elements (1 on the Contul meu page & 1 on the Menu bar).
+        /// </summary>
+        /// <returns>True if the list contains both avatars, false otherwise.</returns>
+        public bool CheckAvatarIsDisplayed()
+        {
+            IReadOnlyCollection<IWebElement> avatarIconList = Browser.FindElements(avatarLocator);
+            Console.WriteLine(avatarIconList.Count);
+            return avatarIconList.Count == 2;
+        }
+
     }
 }

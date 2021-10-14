@@ -1,5 +1,6 @@
 ﻿using EMagTest.HelperMethods;
 using EMagTest.Pages;
+using EMagTest.TestSuite.Base;
 using EMagTest.WebDriverFactory;
 using NUnit.Framework;
 using System;
@@ -10,7 +11,7 @@ using static EMagTest.WebDriverFactory.Browser;
 
 namespace EMagTest.TestSuite.ContulMeuSuite
 {
-    class DatePersonaleTest
+    class DatePersonaleTest:TestBase
     {
         public const string DateleTaleLinkName = "administreaza datele tale";
         public string[] gender = { "Male", "Female" };
@@ -18,21 +19,15 @@ namespace EMagTest.TestSuite.ContulMeuSuite
         public List<string> dateleMeleLabelList = new List<string> { "Forma de adresare:", "Nume Prenume:", "Nickname:", "Telefon Fix:", "Data nașterii:", "Nivel educatie:" };
         Random _random = new Random();
 
-        [SetUp]
-        public void Setup()
+        public override void Setup()
         {
-            Browser.Init(BrowserName.Chrome);
+            base.Setup();
             Browser.GoTo(Config.LogInURL);
-            Browser.WindowMaximize();
-            PageWrapper.Init();
         }
 
-        [TearDown]
-        public void Close()
-        {
-            Browser.Close();
-        }
-
+        /// <summary>
+        /// Fill in some fields from the Datele Mele Form and check the details are displayed correctly.
+        /// </summary>
         [Test]
         public void FillInDateleMeleFormSubmitANDCheckOK()
         {
