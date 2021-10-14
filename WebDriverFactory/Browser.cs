@@ -13,7 +13,7 @@ namespace EMagTest.WebDriverFactory
 {
     public static class Browser
     {
-        
+
         private static IWebDriver _driver;
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace EMagTest.WebDriverFactory
 
         public enum Months
         {
-            ianuarie=1,
+            ianuarie = 1,
             februarie,
             martie,
             aprilie,
@@ -147,7 +147,7 @@ namespace EMagTest.WebDriverFactory
         /// <param name="by">By.</param>
         public static void ScrollToElement(By by)
         {
-            var e = _driver.FindElement(by,5,displayed:true);
+            var e = _driver.FindElement(by, 5, displayed: true);
             ((IJavaScriptExecutor)_driver)
             .ExecuteScript("arguments[0].scrollIntoView(true);", e);
 
@@ -159,9 +159,16 @@ namespace EMagTest.WebDriverFactory
         /// <param name="element">IWebElement</param>
         public static void ScrollToElement(IWebElement element)
         {
-             _driver.ActionsMouseHover (element);
-           
+            _driver.ActionsMouseHover(element);
         }
+
+        public static void ChangeAttributeValue(By by, string attributeName, string attributeValue)
+        {
+            ((IJavaScriptExecutor)_driver)
+                .ExecuteScript($"document.getElementsBy({by}).setAttribute('{attributeName}', '{attributeValue}')");
+
+        }
+
         /// <summary>
         /// Click on a web element.
         /// </summary>

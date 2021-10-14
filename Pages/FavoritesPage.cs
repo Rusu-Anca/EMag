@@ -6,13 +6,10 @@ using System.Text;
 
 namespace EMagTest.Pages
 {
-    class FavoritesPage : PageBase
+    public class FavoritesPage : PageBase
     {
         
-       /* public FavoritesPage(IWebDriver driver) : base(driver)
-        {
-        }*/
-
+      
 
         public By cardContainer_locator => By.ClassName("card-container");
 

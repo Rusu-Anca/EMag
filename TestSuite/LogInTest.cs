@@ -16,21 +16,7 @@ namespace EMagTest.TestSuite
     {
         public const string AccountNameWelcome = "Salut, Rusu Ancuta Elena";
 
-        [SetUp]
-        public void Setup()
-        {
-            Browser.Init(BrowserName.Chrome);
-            Browser.GoTo(Config.BaseURL);
-            Browser.WindowMaximize();
-            PageWrapper.Init();
-        }
-
-        [TearDown]
-        public void Close()
-        {
-            Browser.Close();
-        }
-
+       
         /// <summary>
         /// Can't configure login tests due to Captcha!!!!
         /// </summary>

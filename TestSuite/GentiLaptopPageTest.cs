@@ -8,10 +8,11 @@ using System.Threading;
 using EMagTest.WebDriverFactory;
 using static EMagTest.WebDriverFactory.Browser;
 using EMagTest.Pages;
+using EMagTest.TestSuite.Base;
 
 namespace EMagTest.TestSuite
 {
-    public class GentiLaptopPageTest
+    public class GentiLaptopPageTest:TestBase
     {
 
         public const string Department = "Laptop, Tablete & Telefoane";
@@ -31,22 +32,13 @@ namespace EMagTest.TestSuite
         public const string Product2Title = "Husa Laptop Trust Primo, 15.6\", Negru";
         public const string Product3Title = "Rucsac Laptop A+ Reno, 15,6\", Black/Red";
 
-
-        [SetUp]
-        public void Setup()
+        public override void Setup()
         {
-            Browser.Init(BrowserName.Chrome);
+            base.Setup();
             Browser.GoTo(Config.GentiLaptopPageURL);
-            Browser.WindowMaximize();
-            PageWrapper.Init();
         }
 
-        [TearDown]
-        public void Close()
-        {
-            Browser.Close();
-        }
-
+      
         /// <summary>
         /// Navigate to a Products Category page, using the Main Menu links: Produse> Laptop, Tablete & Telefoane> Laptopuri si Accesorii> Laptopuri
         /// and Assert the Corrct page is displayed.
