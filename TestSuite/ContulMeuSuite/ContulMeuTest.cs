@@ -33,11 +33,13 @@ namespace EMagTest.TestSuite
             "Cercetari de piata"
         };
 
+        /*
         public override void Setup()
         {
             base.Setup();
             Browser.GoTo(Config.LogInURL);
         }
+        */
 
         /// <summary>
         /// Check that the header on each panel is correctly displayed. 
@@ -96,6 +98,7 @@ namespace EMagTest.TestSuite
         [Test]
         public void CheckYouCanUploadAvatar()
         {
+            Browser.GoTo(Config.LogInURL);
             PageWrapper.login.LoginWithFacebook(Config.Credentials.ValidFacebook.Email, Config.Credentials.ValidFacebook.Password, Config.Credentials.ValidFacebook.SocialEmailPassword);
             Thread.Sleep(500);
             PageWrapper.contulMeuPage.UploadAvatar(AvatarPhotos[0]);

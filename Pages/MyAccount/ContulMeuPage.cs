@@ -61,17 +61,26 @@ namespace EMagTest.Pages.MyAccount
         }
 
         /// <summary>
-        /// 
+        /// Click on the grade button to evaluate the EMage service.
         /// </summary>
-        /// <param name="nota"></param>
+        /// <param name="nota">The grade you want to select.</param>
         public void SelectNota(string nota)
         {
             IReadOnlyCollection<IWebElement> note = Browser.FindElements(evalueazaExperientaNota_locator);
             WebElementsHelperMethods.ClickOnCollectionElementIfMatches(note, nota);
         }
 
+        /// <summary>
+        /// Check if the placeholder in the message field is displayed.
+        /// </summary>
+        /// <param name="expected">The string expected to be displayed.</param>
+        /// <returns>True if the placeholder is correct, false otherwise.</returns>
         public bool PlaceholderIsDisplayed(string expected) => Browser.FindElement(userFeedbackMessage_locator).Text.Equals(expected);
 
+        /// <summary>
+        /// Fill in the massage field with the desired message.
+        /// </summary>
+        /// <param name="message"></param>
         public void InputFeedbackMessage(string message) => Browser.FindElement(userFeedbackMessage_locator).EnterText(message);
 
         /// <summary>
@@ -86,6 +95,11 @@ namespace EMagTest.Pages.MyAccount
             return new DatePersonalePage();
         }
 
+        /// <summary>
+        /// Check wether the Favorite pickup location is displayed on the Punct ridicare panel.
+        /// </summary>
+        /// <param name="description">The name of the Favorite pickup location.</param>
+        /// <returns>True if it is displayed, False otherwise.</returns>
         public bool CheckPunctRidicareFavoritPanelDetails(string description) => Browser.FindElement(punctRidicareDesciption_locator).Text.Contains(description);
 
 
@@ -128,6 +142,7 @@ namespace EMagTest.Pages.MyAccount
             IReadOnlyCollection<IWebElement> punctRidicareList = Browser.FindElements(punctRidicare);
             WebElementsHelperMethods.ScrollAndClickOnCollectionElementIfMatches(punctRidicareList, punctRidicareName);
         }
+
         /// <summary>
         /// Itareate through the list of options displayed, match the desired option, scroll it into view and click on it.
         /// </summary>
@@ -137,8 +152,15 @@ namespace EMagTest.Pages.MyAccount
             IReadOnlyCollection<IWebElement> judetOptionList = Browser.FindElements(judetOption);
             WebElementsHelperMethods.ScrollAndClickOnCollectionElementIfMatches(judetOptionList, optionName);
         }
+
+        /// <summary>
+        /// Save the selected pickup location.
+        /// </summary>
         public void ClickOnSavePunctRidicare() => Browser.ClickWebElement(saveButton_punctRidicareFavorit);
 
+        /// <summary>
+        /// Click on Inapoi la Lista button.
+        /// </summary>
         public void ClickOnInapoiLaListaButton()
         {
             IWebElement element = Browser.FindElement(inapoiLaListaButton);
@@ -149,6 +171,12 @@ namespace EMagTest.Pages.MyAccount
 
         }
 
+        /// <summary>
+        /// Select the Favorite pickup location (Punct Ridicare Favorit).
+        /// </summary>
+        /// <param name="judetul"></param>
+        /// <param name="localitatea"></param>
+        /// <param name="punctRidicareName">The name of the pickup location.</param>
         public void SelectPunctRidicareFavorit(string judetul, string localitatea, string punctRidicareName)
         {
             ClickOnJudetDropdown();
@@ -161,14 +189,24 @@ namespace EMagTest.Pages.MyAccount
             ClickOnSavePunctRidicare();
         }
 
+        /// <summary>
+        /// Click on the Edtit avatar button.
+        /// </summary>
         public void ClickOnEditAvatarButton() => Browser.ClickWebElement(editAvatarButton);
 
+        /// <summary>
+        /// Upload the avatar.
+        /// </summary>
+        /// <param name="photoName">The name of the photo you want to upload as avatar.</param>
         public void UploadAvatar(string photoName)
         {
             Browser.FindElement(avatarUpload_locator).SendKeys(@$"C:\Users\ancuta.rusu\source\repos\EMag\TestDataAccess\Photos\{photoName}.jpg");
             Browser.ChangeAttributeValue(avatarResizeKnob, "style", "left: 10.0402%;");
         }
 
+        /// <summary>
+        /// Delete the avatar.
+        /// </summary>
         public void DeleteAvatar()
         {
             ClickOnEditAvatarButton();
