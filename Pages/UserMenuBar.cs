@@ -33,7 +33,11 @@ namespace EMagTest.Pages
             return new FavoritesPage();
         }
 
-        public void NavigateToCARTPage() => Browser.ClickWebElement(myCart_locator);
+        public CosulMeuPage NavigateToCARTPage()
+        {
+            Browser.ClickWebElement(myCart_locator);
+            return new CosulMeuPage();
+        }
 
         public bool CheckAccountName(string accountName)
         {

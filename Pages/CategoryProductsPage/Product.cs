@@ -10,10 +10,7 @@ namespace EMagTest.Pages.CategoryProductsPage
 {
     public class Product : PageBase
     {
-/*
-        public Product(IWebDriver driver) : base(driver)
-        {
-        }*/
+
 
         public By productTitle_locator => By.CssSelector(".card-v2-info .pad-hrz-xs");
 
@@ -34,12 +31,21 @@ namespace EMagTest.Pages.CategoryProductsPage
         public By paginationButtons_locator => By.CssSelector("#listing-paginator li");
 
 
-        /// <summary>
-        /// Check if the title of each product on the page contains a specific value/string.
-        /// </summary>
-        /// <param name="expected">The value/string the produt title should contain.</param>
-        /// <returns>True if it contains the expected value/text, False otherwise.</returns>
-        public bool CheckProductsTitleContains(string expected)
+        public void NavigateToLaptopCategoryPage(string department, string productCategory )
+        {
+            Browser.LoadComplete(10);
+            PageWrapper.ribbonMenu.HoverOnMenuClickSubmenuItem(department);
+            PageWrapper.sideMenu.ClickOnProductCategorySideMenu(productCategory);
+            Thread.Sleep(1000);
+            PageWrapper.sideMenu.ClickOnLaptopCategory();
+        }
+
+            /// <summary>
+            /// Check if the title of each product on the page contains a specific value/string.
+            /// </summary>
+            /// <param name="expected">The value/string the produt title should contain.</param>
+            /// <returns>True if it contains the expected value/text, False otherwise.</returns>
+            public bool CheckProductsTitleContains(string expected)
         {
             int count = 0;
             IReadOnlyCollection<IWebElement> productsTitleList = Browser.FindElements(productTitle_locator);

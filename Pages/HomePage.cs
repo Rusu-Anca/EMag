@@ -57,6 +57,12 @@ namespace EMagTest.Pages
 
         public void NavigateHome() => Browser.ClickWebElement(logo_locator);
 
+        public void NavigateHomeAndCloseOfertaZilei()
+        {
+            NavigateHome();
+            CloseOfertaZilei();
+        }
+
         public void ClickOnToolTipLink() => Browser.ClickWebElement(toolTipLink_locator);
 
         public void CloseOfertaZilei() => Browser.ClickWebElement(closeOfertaZIlei_locator);
