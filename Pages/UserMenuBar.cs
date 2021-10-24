@@ -14,7 +14,7 @@ namespace EMagTest.Pages
         }
 */
         public By myAccount_locator => By.CssSelector("#my_account .ini");
-        public By myWishList_locator => By.Id("my_wishlist");
+        public By myFavorites_locator => By.Id("my_wishlist");
         public By myCart_locator => By.Id("my_cart");
         public By intraInCont_locator => By.LinkText("Intra in cont");
         public By accountName_locator => By.CssSelector(".navbar-account-dropdown .ph-dropdown-inner p");
@@ -27,7 +27,11 @@ namespace EMagTest.Pages
             Browser.ClickWebElement(intraInCont_locator);
         }
 
-        public void NavigateToWishListPage() => Browser.ClickWebElement(myCart_locator);
+        public FavoritesPage NavigateToFavorites()
+        {
+            Browser.ClickWebElement(myFavorites_locator);
+            return new FavoritesPage();
+        }
 
         public void NavigateToCARTPage() => Browser.ClickWebElement(myCart_locator);
 

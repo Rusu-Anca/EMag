@@ -127,6 +127,17 @@ namespace EMagTest.Pages.CategoryProductsPage
         }
 
         /// <summary>
+        /// Click on a Top Filter dropdown and select a Filter Option.
+        /// </summary>
+        /// <param name="filterHeaderName">The name of the filter you want to set.</param>
+        /// <param name="filterOptionName">The name of the Option you want to select.</param>
+        public void ClickOnFilterAndSelectOption(string filterHeaderName, string filterOptionName)
+        {
+            ClickDropdownFilterOption(filterHeaderName);
+            SelectFilterOption(filterOptionName);
+        }
+
+        /// <summary>
         /// Identify the desired filter within the list of top filters and click on the remove button displayed next to it, to 
         /// remove the filter option(s).
         /// Note: this works for both static and active filters.

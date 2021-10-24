@@ -11,6 +11,7 @@ namespace EMagTest.Pages
 
     public class HomePage : PageBase
     {
+        public By logo_locator => By.CssSelector("[title='eMAG - Libertate în fiecare zi']");
 
         public By acceptCokkies_locator => By.ClassName("js-accept");
         public By closeOfertaZIlei_locator => By.ClassName("close");
@@ -50,7 +51,12 @@ namespace EMagTest.Pages
           */
 
         public bool AssertTitle(string expected) => Browser.PageTitleContains(expected);
+
+
         public void AcceptCookies() => Browser.ClickWebElement(acceptCokkies_locator);
+
+        public void NavigateHome() => Browser.ClickWebElement(logo_locator);
+
         public void ClickOnToolTipLink() => Browser.ClickWebElement(toolTipLink_locator);
 
         public void CloseOfertaZilei() => Browser.ClickWebElement(closeOfertaZIlei_locator);

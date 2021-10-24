@@ -150,6 +150,7 @@ namespace EMagTest.Pages
         /// <param name="socialPassword">Emag password.</param>
         public void LoginWithFacebook(string email, string password, string socialPassword)
         {
+            Browser.GoTo(Config.LogInURL);
             NavigateToFacebookLogin();
             FacebookAcceptCookies();
             InputFacebookEmail(email);
