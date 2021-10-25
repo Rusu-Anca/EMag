@@ -7,7 +7,7 @@ namespace EMagTest.Pages
     class ProductPage:PageBase
     {
 
-
+      //  new test
 
     }
 }
